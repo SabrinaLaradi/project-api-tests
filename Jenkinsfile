@@ -36,5 +36,27 @@ pipeline {
         always {
             archiveArtifacts artifacts: 'reports/*.html', fingerprint: true
         }
+        success {
+            emailext(
+                subject: "✅ BUILD OK — ${JOB_NAME} #${BUILD_NUMBER}",
+                body: """<h2>Build réussi !</h2>
+                         <p>Job : <b>${JOB_NAME}</b></p>
+                         <p>Build : <b>#${BUILD_NUMBER}</b></p>
+                         <a href="${BUILD_URL}">Voir le build</a>""",
+                mimeType: 'text/html',
+                to: 'sabrinalaradi13@gmail.com',
+                attachmentsPattern: 'reports/*.html'
+            )
+        }
+        failure {
+            emailext(
+                subject: "❌ BUILD ÉCHOUÉ — ${JOB_NAME} #${BUILD_NUMBER}",
+                body: """<h2>Build en échec !</h2>
+                         <p>Job : <b>${JOB_NAME}</b></p>
+                         <a href="${BUILD_URL}console">Voir les logs</a>""",
+                mimeType: 'text/html',
+                to: 'sabrinalaradi13@gmail.com'
+            )
+        }
     }
 }
