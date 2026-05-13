@@ -36,7 +36,8 @@ jobs:
             -r cli,htmlextra \
             --reporter-htmlextra-export reports/report.html
         
-        # Étape 5 : Sauvegarder le rapport HTML comme artefact GitHub même si les tests échouent on sauvegarde quand même le rapport
+        # Étape 5 : Sauvegarder le rapport HTML comme artefact GitHub 
+        #même si les tests échouent on sauvegarde quand même le rapport
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4
