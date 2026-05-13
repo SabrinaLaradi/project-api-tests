@@ -44,7 +44,7 @@ pipeline {
                          <p>Build : <b>#${BUILD_NUMBER}</b></p>
                          <a href="${BUILD_URL}">Voir le build</a>""",
                 mimeType: 'text/html',
-                to: 'sabrinalaradi13@gmail.com',
+                to: 'y.djamel@dsyconsulting.fr',
                 attachmentsPattern: 'reports/*.html'
             )
         }
