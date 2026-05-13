@@ -80,7 +80,7 @@
               "\r",
               "pm.test(\"User updated correctly\", function () {\r",
               "    var jsonData = pm.response.json();\r",
-              "        pm.expect(jsonData.firstname).to.eql(\"Maria\");\r",
+              "        pm.expect(jsonData.firstname).to.eql(\"Elise\");\r",
               "        pm.expect(jsonData.lastname).to.eql(\"Dupont\");\r",
               "});\r",
               ""
