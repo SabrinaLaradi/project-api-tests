@@ -1,0 +1,47 @@
+name: Postman API Tests
+
+# Déclencheur : la pipeline se lance automatiquement sur chaque push sur la branche github-actions
+on:
+  push:
+    branches: [ github-actions ]
+
+jobs:
+  postman-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+        # Étape 1 : Récupérer le code source du repo
+      - name: Checkout
+        uses: actions/checkout@v4
+
+        # Étape 2 : Installer Node.js version 24
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+        # Étape 3 : Installer Newman et le reporter HTML
+      - name: Install Newman
+        run: |
+          npm install -g newman
+          npm install -g newman-reporter-htmlextra
+
+        # Étape 4 : Lancer les tests Postman avec Newman
+        # et générer le rapport HTML dans le dossier reports/
+      - name: Run Postman Tests
+        run: |
+          mkdir -p reports
+          newman run collections/api-ci-project-collection.json \
+            -e environments/environments-test.json \
+            -r cli,htmlextra \
+            --reporter-htmlextra-export reports/report.html
+        
+        # Étape 5 : Sauvegarder le rapport HTML comme artefact GitHub 
+        #même si les tests échouent 
+        #on sauvegarde quand même le rapport
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: newman-report
+          path: reports/report.html
