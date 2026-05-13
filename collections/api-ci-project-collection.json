@@ -1,0 +1,262 @@
+{
+  "info": {
+    "_postman_id": "7c5d5fed-c8a1-4e97-bf59-577ab795b36f",
+    "name": "api-ci-project",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "31283493"
+  },
+  "item": [
+    {
+      "name": "Create user",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const jsonData = pm.response.json();\r",
+              "pm.collectionVariables.set(\"test_id\", jsonData.id);\r",
+              "\r",
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(201);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\t\r\n        \"firstname\": \"Sabrina\",\r\n        \"lastname\": \"LARADI\",\r\n        \"age\": 26,\r\n        \"phonenumbers\": [\r\n            \"0785663387\"\r\n        ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://6399e35616b0fdad774cf364.mockapi.io/testapi/api/v1/users",
+          "protocol": "https",
+          "host": [
+            "6399e35616b0fdad774cf364",
+            "mockapi",
+            "io"
+          ],
+          "path": [
+            "testapi",
+            "api",
+            "v1",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Modify user name",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"User updated correctly\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "        pm.expect(jsonData.firstname).to.eql(\"Elise\");\r",
+              "        pm.expect(jsonData.lastname).to.eql(\"Dupont\");\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\t\r\n    \"firstname\":\"Elise\",  \r\n    \"lastname\": \"Dupont\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://6399e35616b0fdad774cf364.mockapi.io/testapi/api/v1/users/{{test_id}}",
+          "protocol": "https",
+          "host": [
+            "6399e35616b0fdad774cf364",
+            "mockapi",
+            "io"
+          ],
+          "path": [
+            "testapi",
+            "api",
+            "v1",
+            "users",
+            "{{test_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get user by id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://6399e35616b0fdad774cf364.mockapi.io/testapi/api/v1/users/{{test_id}}",
+          "protocol": "https",
+          "host": [
+            "6399e35616b0fdad774cf364",
+            "mockapi",
+            "io"
+          ],
+          "path": [
+            "testapi",
+            "api",
+            "v1",
+            "users",
+            "{{test_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "delete user",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "pm.collectionVariables.unset(\"test_user\")"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "https://6399e35616b0fdad774cf364.mockapi.io/testapi/api/v1/users/{{test_id}}",
+          "protocol": "https",
+          "host": [
+            "6399e35616b0fdad774cf364",
+            "mockapi",
+            "io"
+          ],
+          "path": [
+            "testapi",
+            "api",
+            "v1",
+            "users",
+            "{{test_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "verify user is deleted",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://6399e35616b0fdad774cf364.mockapi.io/testapi/api/v1/users",
+          "protocol": "https",
+          "host": [
+            "6399e35616b0fdad774cf364",
+            "mockapi",
+            "io"
+          ],
+          "path": [
+            "testapi",
+            "api",
+            "v1",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "test_id",
+      "value": ""
+    }
+  ]
+}
