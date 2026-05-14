@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    parameters {
+        choice(name: 'ENV_NAME', choices: ['test', 'pp', 'prod'], description: 'Environnement cible des tests')
+    }
+
     tools {
         nodejs 'node24'
     }
@@ -22,12 +26,12 @@ pipeline {
 
         stage('Run API Tests') {
             steps {
-                bat '''
+                bat """
                 newman run collections/api-ci-project-collection.json ^
                 -e environments/environments-${ENV_NAME}.json ^
                 -r cli,htmlextra ^
                 --reporter-htmlextra-export reports\\report.html
-                '''
+                """
             }
         }
     }
@@ -42,9 +46,10 @@ pipeline {
                 body: """<h2>Build réussi !</h2>
                          <p>Job : <b>${JOB_NAME}</b></p>
                          <p>Build : <b>#${BUILD_NUMBER}</b></p>
+                         <p>Environnement : <b>${ENV_NAME}</b></p>
                          <a href="${BUILD_URL}">Voir le build</a>""",
                 mimeType: 'text/html',
-                to: 'y.djamel@dsyconsulting.fr',
+                to: 'sabrinalaradi13@gmail.com',
                 attachmentsPattern: 'reports/*.html'
             )
         }
@@ -53,6 +58,7 @@ pipeline {
                 subject: "❌ BUILD ÉCHOUÉ — ${JOB_NAME} #${BUILD_NUMBER}",
                 body: """<h2>Build en échec !</h2>
                          <p>Job : <b>${JOB_NAME}</b></p>
+                         <p>Environnement : <b>${ENV_NAME}</b></p>
                          <a href="${BUILD_URL}console">Voir les logs</a>""",
                 mimeType: 'text/html',
                 to: 'sabrinalaradi13@gmail.com'
