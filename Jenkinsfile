@@ -24,7 +24,7 @@ pipeline {
             steps {
                 bat '''
                 newman run collections/api-ci-project-collection.json ^
-                -e environments/environments-test.json ^
+                -e environments/environments-${ENV_NAME}.json ^
                 -r cli,htmlextra ^
                 --reporter-htmlextra-export reports\\report.html
                 '''

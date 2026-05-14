@@ -42,7 +42,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\t\r\n        \"firstname\": \"Sabrina\",\r\n        \"lastname\": \"Laradi\",\r\n        \"age\": 25,\r\n        \"phonenumbers\": [\r\n            \"0542449987\"\r\n        ]\r\n}",
+          "raw": "{\t\r\n        \"firstname\": \"Sabrina\",\r\n        \"lastname\": \"LARADI\",\r\n        \"age\": 26,\r\n        \"phonenumbers\": [\r\n            \"0785663387\"\r\n        ]\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -50,10 +50,10 @@
           }
         },
         "url": {
-          "raw": "https://6399e35616b0fdad774cf364.mockapi.io/testapi/api/v1/users",
+          "raw": "https://{{url}}.mockapi.io/testapi/api/v1/users",
           "protocol": "https",
           "host": [
-            "6399e35616b0fdad774cf364",
+            "{{url}}",
             "mockapi",
             "io"
           ],
@@ -104,10 +104,10 @@
           }
         },
         "url": {
-          "raw": "https://6399e35616b0fdad774cf364.mockapi.io/testapi/api/v1/users/{{test_id}}",
+          "raw": "https://{{url}}.mockapi.io/testapi/api/v1/users/{{test_id}}",
           "protocol": "https",
           "host": [
-            "6399e35616b0fdad774cf364",
+            "{{url}}",
             "mockapi",
             "io"
           ],
@@ -143,10 +143,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "https://6399e35616b0fdad774cf364.mockapi.io/testapi/api/v1/users/{{test_id}}",
+          "raw": "https://{{url}}.mockapi.io/testapi/api/v1/users/{{test_id}}",
           "protocol": "https",
           "host": [
-            "6399e35616b0fdad774cf364",
+            "{{url}}",
             "mockapi",
             "io"
           ],
@@ -187,10 +187,10 @@
           "raw": ""
         },
         "url": {
-          "raw": "https://6399e35616b0fdad774cf364.mockapi.io/testapi/api/v1/users/{{test_id}}",
+          "raw": "https://{{url}}.mockapi.io/testapi/api/v1/users/{{test_id}}",
           "protocol": "https",
           "host": [
-            "6399e35616b0fdad774cf364",
+            "{{url}}",
             "mockapi",
             "io"
           ],
@@ -211,10 +211,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "https://6399e35616b0fdad774cf364.mockapi.io/testapi/api/v1/users",
+          "raw": "https://{{url}}.mockapi.io/testapi/api/v1/users",
           "protocol": "https",
           "host": [
-            "6399e35616b0fdad774cf364",
+            "{{url}}",
             "mockapi",
             "io"
           ],
